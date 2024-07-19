@@ -1,4 +1,3 @@
-
 /* This is the simple basic sql query, How to create, insert, select, alter, update, delete and all join */
 
 -- creating table and assigning attribute
