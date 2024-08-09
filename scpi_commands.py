@@ -11,6 +11,74 @@ instrument = rm.open_resource('GPIB0::6::INSTR')  # instrument address lightwave
 idn = instrument.query('*IND?')
 print(f'Device ID:{idn}')
 
+# This week worked scpi commands are
+
+# Self-Test Query
+instrument = rm.open_resource('GPIB0::28::INSTR')
+instrument.query('*TST?')
+
+# Clear Status Command
+instrument = rm.open_resource('GPIB0::28::INSTR')
+instrument.write('*CLS')
+
+# Standard Event Status Enable Command
+instrument = rm.open_resource('GPIB0::28::INSTR')
+instrument.write('*ESE')
+
+# Standard Event Status Enable query
+instrument = rm.open_resource('GPIB0::28::INSTR')
+instrument.query('*ESE?')
+
+# Standard Event Status Register query
+instrument = rm.open_resource('GPIB0::28::INSTR')
+instrument.query('*ESR?')
+
+# Options query
+instrument = rm.open_resource('GPIB0::28::INSTR')
+idn = instrument.query('*OPT?')
+print(f'Device ID:{idn}')
+# Device ID:High Performance,0,0
+
+instrument = rm.open_resource('GPIB0::6::INSTR') # instrument address change
+idn = instrument.query('*OPT?')
+print(f'Device ID:{idn}')
+# Device ID: , 81635A
+
+# Wait command
+instrument = rm.open_resource('GPIB0::28::INSTR')
+idn = instrument.write('*WAI')
+
+# Read status byte query
+instrument = rm.open_resource('GPIB0::28::INSTR')
+idn = instrument.query('*STB?')
+
+# Operation complete command
+instrument = rm.open_resource('GPIB0::28::INSTR')
+idn = instrument.write('*OPC')
+
+# Operation complete query
+instrument = rm.open_resource('GPIB0::28::INSTR')
+idn = instrument.query('*OPC?')
+
+## To read attenuator value
+instrument = rm.open_resource('GPIB0::28::INSTR')
+idn = instrument.query('INPUT:ATT?')
+print(f'Device ID:{idn}')
+# Device ID:+2.50000000E+000
+
+## To read the wavelength value
+instrument = rm.open_resource('GPIB0::28::INSTR')
+idn = instrument.query('INPUT:WAV?')
+print(f'Device ID:{idn}')
+# Device ID:+1.31000000E-006
+
+# Returns a list of all GPIB commands
+instrument = rm.open_resource('GPIB0::6::INSTR')
+idn = instrument.query(':SYST:HELP:HEAD')
+print(f'Device ID:{idn}')
+
+# Last week worked scpi commands are :
+
 # Display Brightness 0/1
 instrument = rm.open_resource('GPIB0::28::INSTR')
 instrument.write('DISP:BRIG 0')
@@ -52,4 +120,4 @@ instrument.write(':IND:OFFS:DISP')
 instrument = rm.open_resource('GPIB0::28::INSTR')
 instrument.write(':IND:APM OFF')
 
-#
+
