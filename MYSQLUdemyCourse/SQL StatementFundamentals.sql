@@ -13,3 +13,9 @@ SELECT count(EmpDept) FROM students.employee;
 SELECT * FROM students.employee
 WHERE EmpName = 'Guhan';
 WHERE EmpAge < 25;
+
+-- The ORDER BY keyword is used to sort the result-set in ascending or descending order(end of the query)
+SELECT * FROM students.employee
+ORDER BY EmpAge ASC;
+ORDER BY EmpAge DESC;
+
