@@ -19,3 +19,9 @@ SELECT * FROM students.employee
 ORDER BY EmpAge ASC;
 ORDER BY EmpAge DESC;
 
+-- The LIMIT clause is used to specify the number of records to return
+SELECT * FROM students.employee
+ORDER BY EmpAge ASC
+LIMIT 3;
+
+
