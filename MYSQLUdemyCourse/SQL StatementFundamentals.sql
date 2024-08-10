@@ -24,4 +24,18 @@ SELECT * FROM students.employee
 ORDER BY EmpAge ASC
 LIMIT 3;
 
+-- The BETWEEN operator selects values within a given range
+SELECT * FROM students.employee
+WHERE EmpAge BETWEEN  24 AND 26;
+
+-- The IN operator allows you to specify multiple values in a WHERE clause
+SELECT * FROM students.employee
+WHERE EmpAge IN (23,25,29)
+ORDER BY EmpAge ASC ; 
+
+-- The LIKE operator is used in a WHERE clause to search for a specified pattern in a column
+SELECT * FROM students.employee
+WHERE EmpName LIKE 'K%';
+WHERE EmpName LIKE '%n%';
+WHERE EmpName LIKE '_a%';
 
