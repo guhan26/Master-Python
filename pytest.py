@@ -1,18 +1,12 @@
-
 # Simple pytest program
-
 import pytest
-
 def func(x):
     return x +5
-
+    
 def test_methodd():
     assert func(3) == 8
 
 # Multiple test
-
-import pytest
-
 # Markers
 @pytest.mark.one
 def test_method1():
@@ -26,22 +20,17 @@ def test_method2():
     b = 20
     assert a+5 == b
 
-
 # Grouping
-
 class TestClass:
     def test_one(self):
         x = "hello"
         assert 'e' in x
-
+        
     def test_two(self):
         x = 'helloworld'
         assert hasattr(x,"check")
 
 # fixture in pytest
-
-import pytest
-
 @pytest.fixture
 def numbers():
     a = 10
@@ -60,28 +49,17 @@ def test_method1(numbers):
 def test_method2(numbers):
     y = 20
     assert  numbers[1] == y
-
-
+    
 def test_method3(numbers):
     z = 25
     assert numbers[2] == z
 
-
-
 # parametrize in pytest
-
-import pytest
-
 @pytest.mark.parametrize("x,y,z",[(10,20,200),(20,40,200)])
 def test_method(x,y,z):
     assert x*y == z
 
 # Test API 
-
-import pytest
-import requests
-import json
-
 def test_login_valid():
 # Define the API endpoint
     url = "https://reqres.in/api/login/"
@@ -96,9 +74,6 @@ def test_login_valid():
     assert token['token'] == "QpwL5tke4Pnpja7X4"
 
 # Markers
-
-import pytest
-
 # This are the multiple markers
 # Annotation
 @pytest.mark.login
@@ -111,7 +86,6 @@ def test_regression():
 def test_regression2():
     print("Test 1")
     assert 4 == 5
-
 
 @pytest.mark.sanity
 def test_regression2():
