@@ -11,8 +11,6 @@ instrument = rm.open_resource('GPIB0::6::INSTR')  # instrument address lightwave
 idn = instrument.query('*IND?')
 print(f'Device ID:{idn}')
 
-# This week worked scpi commands are
-
 # Self-Test Query
 instrument = rm.open_resource('GPIB0::28::INSTR')
 instrument.query('*TST?')
@@ -76,8 +74,6 @@ print(f'Device ID:{idn}')
 instrument = rm.open_resource('GPIB0::6::INSTR')
 idn = instrument.query(':SYST:HELP:HEAD')
 print(f'Device ID:{idn}')
-
-# Last week worked scpi commands are :
 
 # Display Brightness 0/1
 instrument = rm.open_resource('GPIB0::28::INSTR')
