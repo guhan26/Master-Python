@@ -1,93 +1,134 @@
-# Simple pytest program
-import pytest
-def func(x):
-    return x +5
-    
-def test_methodd():
-    assert func(3) == 8
+# simple test case
+
+from pytest import fixture
+from pytest import mark
+
+def test_firsttestcase():
+    assert 1+2 == 3
+
+# # Markers in pytest
 
 # Multiple test
-# Markers
-@pytest.mark.one
-def test_method1():
-    x = 5
-    y =10
-    assert x == y
+# @mark.smoke
+def test_firsttestcase():
+    assert 1+2 == 3
 
-@pytest.mark.two
-def test_method2():
-    a = 15
-    b = 20
-    assert a+5 == b
+def test_one():
+    assert 4 == 4
 
-# Grouping
-class TestClass:
-    def test_one(self):
-        x = "hello"
-        assert 'e' in x
-        
-    def test_two(self):
-        x = 'helloworld'
-        assert hasattr(x,"check")
+def test_case():
+    assert 3 == 3
 
-# fixture in pytest
-@pytest.fixture
-def numbers():
-    a = 10
-    b = 20
-    c = 25
-    return [a,b,c]
+# flag is a global variable
+flag = 1
 
-# A test that is expected to fail
-@pytest.mark.xfail
-def test_method1(numbers):
-    x = 15
-    assert numbers[0] == x
+# The testcase that is expected to fail
+@mark.xfail
+def testAddItemtoCart():
+    assert [1,2,3] == [1,2,]
+    print("add item one successful")
+    global flag
+    flag = 1
+
+# Skipping a specific test function using  conditions
+@mark.skipif(flag=1)
+def testRemoveItemFromCart():
+    print("remove item successful")
+
+def testAddItemtoCartone():
+        print("add item one successful")
 
 # Skipping a specific test function
-@pytest.mark.skip
-def test_method2(numbers):
-    y = 20
-    assert  numbers[1] == y
+@mark.skip
+def testRemoveItemFromCarttwo():
+        print("remove item two successful")
+
+
+# Test Function with Multiple Markers
+@mark.smoke  # This decorator tags the test function with the smoke marker
+@mark.product  # This decorator tags the test function with the product marker
+def test_method_method():
+    assert 6 == 3*2
+
+@mark.product
+def test_method_tw0():
+    assert 5+2 == 7
+
+@mark.product
+def test_method_tree():
+    assert 1+2 == 7
+
+
+# # Grouping tests into classes
+@mark.product  # This decorator tags the test class with the product marker
+class TestProduct:
+
+    @mark.smoke  # This decorator tags the test function with the smoke marker
+    def test_method_method(self):
+        assert 6 == 3*2
+
+    def test_method_tw0(self):
+        assert 5+2 == 7
+
+    def test_method_tree(self):
+        assert 1+2 == 7
+
+
+# # fixtures in pytest
+
+# fixtures will run before & after each testcases
+@pytest.fixture(scope="module")
+def setup():
+    print("launch browser")
+    print("login")
+    print("browse products")
+
+    # yield keyword execute after the fixture code is executed
+    yield
+    print("logoff")
+    print("close browser")
+
+def testAddItemtoCart(setup):
+    print("add item one successful")
+
+def testRemoveItemFromCart(setup):
+    print("remove item successful")
+
+def testAddItemtoCartone(setup):
+    print("add item one successful")
+
+def testRemoveItemFromCarttwo(setup):
+    print("remove item two successful")
+
+
+# # parametrize in pytest
+
+# parametrize using Markers
+@mark.param_testcase
+@mark.parametrize("number",[1,0,100,-4])
+def test_first(number):
+    assert number > 0
+
+@mark.param_testcase
+@mark.parametrize("product_name,product_color",[("car","red"),("mobile","golden"),("laptop","silver")])
+def test_product_detail(product_name,product_color):
+    print(f" I am {product_name} with {product_color} color")
     
-def test_method3(numbers):
-    z = 25
-    assert numbers[2] == z
+# parametrize using fixture
+@fixture() # decorator
+def fruit():
+    return "apple"
 
-# parametrize in pytest
-@pytest.mark.parametrize("x,y,z",[(10,20,200),(20,40,200)])
-def test_method(x,y,z):
-    assert x*y == z
+@mark.fixture_sampl1
+def test_fruit(fruit):
+    print(f"I am {fruit}")
 
-# Test API 
-def test_login_valid():
-# Define the API endpoint
-    url = "https://reqres.in/api/login/"
-# Define the login credentials
-    data = {'email': 'eve.holt@reqres.in','password':'cityslicka'}
-# Send POST request to the API
-    response = requests.post(url, data=data)
-    token = json.loads(response.text)
-# Check that the response status code is 200 (OK)
-    assert response.status_code == 200
-# Verify that the token in the response matches the expected value
-    assert token['token'] == "QpwL5tke4Pnpja7X4"
+@fixture(params=["apple","guava","orange"])
+def fruit(request):
+    # Provides information on the executing test function
+    return request.param  # request.param returns the current value from the params list
 
-# Markers
-# This are the multiple markers
-# Annotation
-@pytest.mark.login
-@pytest.mark.regression
-def test_regression():
-    print("Test 1")
-
-# A test that is expected to fail
-@pytest.mark.xfail
-def test_regression2():
-    print("Test 1")
-    assert 4 == 5
-
-@pytest.mark.sanity
-def test_regression2():
-    print("Test 1") 
+@mark.fixture_sampl1
+def test_fruit(fruit):
+    print(f"I am {fruit}")
 
