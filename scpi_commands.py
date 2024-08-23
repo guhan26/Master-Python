@@ -115,5 +115,3 @@ instrument.write(':IND:OFFS:DISP')
 # Turning the Calibrate On/Off
 instrument = rm.open_resource('GPIB0::28::INSTR')
 instrument.write(':IND:APM OFF')
-
-
