@@ -71,7 +71,7 @@ print(f'Device ID:{idn}')
 # Device ID:+1.31000000E-006
 
 # Returns a list of all GPIB commands
-instrument = rm.open_resource('GPIB0::6::INSTR')
+instrument = rm.open_resource('GPIB0::28::INSTR')
 idn = instrument.query(':SYST:HELP:HEAD')
 print(f'Device ID:{idn}')
 
