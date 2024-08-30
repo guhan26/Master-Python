@@ -8,7 +8,7 @@ def test_firsttestcase():
 # # Markers in pytest
 
 # Multiple test
-# @mark.smoke
+@mark.smoke # customised marker
 def test_firsttestcase():
     assert 1+2 == 3
 
