@@ -1,11 +1,10 @@
+from pytest import fixture  # This line imports the fixture decorator from the pytest module
+from pytest import mark  # This line imports the mark decorator from the pytest module
+
 # simple test case
-
-from pytest import fixture
-from pytest import mark
-
 def test_firsttestcase():
     assert 1+2 == 3
-
+    
 # # Markers in pytest
 
 # Multiple test
