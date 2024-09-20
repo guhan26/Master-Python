@@ -2,6 +2,58 @@ import pyvisa
 rm = pyvisa.ResourceManager()
 print(rm.list_resources())
 
+# SCPI Commands for 8163A lightwave multimeter
+
+
+# Sets the power measurement unit to dBm
+power_channel1 = instrument_multimeter.query('SENS2:CHAN1:POW:UNIT DBM')
+print(f'Device :{power_channel1}')
+
+# Measure power on Channel 1 (Input 1)
+power_channel1 = instrument_multimeter.query('READ2:CHAN1:POW?')
+print(f'Device :{power_channel1}')
+
+# To read the wavelength value in the lightwave multimeter
+power_channel1 = instrument_multimeter.query(':SENS2:CHAN1:POW:WAV?')
+print(f'Device :{power_channel1}')
+
+# Returns whether the module slot is empty
+power_channel1 = instrument_multimeter.query('SLOT2:EMPT?')
+print(f'Device :{power_channel1}')
+
+# Returns information about the module
+power_channel1 = instrument_multimeter.query('SLOT2:IDN?')
+print(f'Device :{power_channel1}')
+
+# Returns whether an optical head is connected
+power_channel1 = instrument_multimeter.query('slot2:head:empt?')
+print(f'Device :{power_channel1}')
+
+# Returns the latest selftest results for a module
+power_channel1 = instrument_multimeter.query('slot2:tst?')
+print(f'Device :{power_channel1}')
+
+# Returns information about the optical head
+power_channel1 = instrument_multimeter.query('slot2:head:idn?')
+print(f'Device :{power_channel1}')
+
+# 86060C Lightwave switch SCPI Commands
+
+
+# Test sending a route command if this is the correct instrument
+# Ensure that this command is applicable to the connected device
+instrument_multimeter = rm.open_resource('GPIB0::2::INSTR')
+multimeter_idn = instrument_multimeter.write(':ROUTE:LAYER:CHANNEL A1,B7')
+print(f"Multimeter ID: {multimeter_idn}")
+
+# Check for Errors: To query the error status
+power_channel2 = instrument_multimeter.query('SYST:ERR?')
+print(f"Measured power on Input 2 (Channel 2): {power_channel2.strip()}")
+
+
+# SCPI Commands for 8156A optical attenuator
+
+
 instrument = rm.open_resource('GPIB0::28::INSTR')  # instrument address attenuator
 idn = instrument.query('*IND?')
 print(f'Device ID:{idn}')
