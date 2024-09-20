@@ -4,7 +4,6 @@ print(rm.list_resources())
 
 # SCPI Commands for 8163A lightwave multimeter
 
-
 # Sets the power measurement unit to dBm
 power_channel1 = instrument_multimeter.query('SENS2:CHAN1:POW:UNIT DBM')
 print(f'Device :{power_channel1}')
@@ -39,7 +38,6 @@ print(f'Device :{power_channel1}')
 
 # 86060C Lightwave switch SCPI Commands
 
-
 # Test sending a route command if this is the correct instrument
 # Ensure that this command is applicable to the connected device
 instrument_multimeter = rm.open_resource('GPIB0::2::INSTR')
@@ -50,9 +48,7 @@ print(f"Multimeter ID: {multimeter_idn}")
 power_channel2 = instrument_multimeter.query('SYST:ERR?')
 print(f"Measured power on Input 2 (Channel 2): {power_channel2.strip()}")
 
-
 # SCPI Commands for 8156A optical attenuator
-
 
 instrument = rm.open_resource('GPIB0::28::INSTR')  # instrument address attenuator
 idn = instrument.query('*IND?')
