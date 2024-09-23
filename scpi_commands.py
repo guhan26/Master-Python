@@ -9,7 +9,11 @@ power_channel1 = instrument_multimeter.query('SENS2:CHAN1:POW:UNIT DBM')
 print(f'Device :{power_channel1}')
 
 # Measure power on Channel 1 (Input 1)
-power_channel1 = instrument_multimeter.query('READ2:CHAN1:POW?')
+power_channel1 = instrument_multimeter.query(':FETCH2:CHAN1:SCAL:POW?')
+print(f'Device :{power_channel1}')
+
+# Measure power on Channel 2 (Input 2)
+power_channel1 = instrument_multimeter.query(':FETCH2:CHAN2:SCAL:POW?')
 print(f'Device :{power_channel1}')
 
 # To read the wavelength value in the lightwave multimeter
